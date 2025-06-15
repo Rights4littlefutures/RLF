@@ -706,4 +706,129 @@
                             </button>
                         </div>
                     </div>
-              
+                </div>
+
+                <!-- Crop Top 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="croptop5.jpg" alt="5 Crop Top">
+                        <div class="sale-badge">SALE</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>5 tester</h3>
+                        <div class="product-price">
+                            <div class="price">
+                                <span class="original-price">$65.99</span>
+                                $55.99
+                            </div>
+                            <button class="view-product" onclick="window.location.href='product-detail.html?product=croptop5'">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Crop Top 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="croptop6.jpg" alt="6 Crop Top">
+                    </div>
+                    <div class="product-info">
+                        <h3>Crop Top tester 6</h3>
+                        <div class="product-price">
+                            <div class="price">$59.99</div>
+                            <button class="view-product" onclick="window.location.href='product-detail.html?product=croptop6'">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="logo.png" alt="RLF Logo">
+                        <span class="footer-logo-text">Rights For Little Futures</span>
+                    </div>
+                    <p>An e-commerce non-profit selling sustainable merchandise to fund Indian charities combating child labor.</p>
+                </div>
+
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p>Email: rightsforlittlefutures@gmail.com</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h3>Service</h3>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="shipping.html">Shipping Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rights For Little Futures. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Mobile Dropdown Toggle
+        const mobileDropdownBtns = document.querySelectorAll('.mobile-dropdown-btn');
+        mobileDropdownBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const dropdown = this.parentElement;
+                dropdown.classList.toggle('active');
+
+                // Close other dropdowns when opening a new one
+                if (dropdown.classList.contains('active')) {
+                    document.querySelectorAll('.mobile-dropdown').forEach(item => {
+                        if (item !== dropdown && item.classList.contains('active')) {
+                            item.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Search Bar Toggle
+        const searchIcon = document.getElementById('search-icon');
+        const searchBar = document.querySelector('.search-bar');
+
+        searchIcon.addEventListener('click', () => {
+            searchBar.classList.toggle('active');
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.matches('.dropdown *, .category-dropdown *')) {
+                const dropdowns = document.querySelectorAll('.dropdown-content, .category-dropdown-content');
+                dropdowns.forEach(dropdown => {
+                    dropdown.style.display = 'none';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
