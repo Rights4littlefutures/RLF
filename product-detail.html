@@ -734,4 +734,424 @@
                         The soft fabric ensures comfort while the sustainable production supports ethical fashion. 
                         Each purchase helps fund education for children in India.
                     </p>
-       
+                    
+                    <div class="product-options">
+                        <span class="option-title">Size:</span>
+                        <div class="size-options">
+                            <div class="size-option" onclick="selectSize(this)">S</div>
+                            <div class="size-option" onclick="selectSize(this)">M</div>
+                            <div class="size-option" onclick="selectSize(this)">L</div>
+                            <div class="size-option" onclick="selectSize(this)">XL</div>
+                        </div>
+                        
+                        <span class="option-title">Quantity:</span>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" id="quantity">
+                            <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary add-to-cart" onclick="addToCart()">Add to Cart</button>
+                    
+                    <div class="impact-statement">
+                        <p><i class="fas fa-heart"></i> Funds 1 week of education for a child in India.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <a href="index.html" class="footer-logo">
+                        <img src="logo.png" alt="RLF Logo">
+                        <span class="footer-logo-text">Rights For Little Futures</span>
+                    </a>
+                    <p>An e-commerce non-profit selling sustainable merchandise to fund Indian charities combating child labor.</p>
+                </div>
+
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p>Email: rightsforlittlefutures@gmail.com</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h3>Service</h3>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="shipping.html">Shipping Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rights For Little Futures. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Mobile Dropdown Toggle
+        const mobileDropdownBtns = document.querySelectorAll('.mobile-dropdown-btn');
+        mobileDropdownBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const dropdown = this.parentElement;
+                dropdown.classList.toggle('active');
+
+                // Close other dropdowns when opening a new one
+                if (dropdown.classList.contains('active')) {
+                    document.querySelectorAll('.mobile-dropdown').forEach(item => {
+                        if (item !== dropdown && item.classList.contains('active')) {
+                            item.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Search Bar Toggle
+        const searchIcon = document.getElementById('search-icon');
+        const searchBar = document.querySelector('.search-bar');
+
+        searchIcon.addEventListener('click', () => {
+            searchBar.classList.toggle('active');
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.matches('.dropdown *, .category-dropdown *')) {
+                const dropdowns = document.querySelectorAll('.dropdown-content, .category-dropdown-content');
+                dropdowns.forEach(dropdown => {
+                    dropdown.style.display = 'none';
+                });
+            }
+        });
+
+        // ====== PRODUCT DATABASE ======
+        const products = {
+            't-shirt1': {
+                title: "Tester T-Shirt",
+                originalPrice: "$59.99",
+                currentPrice: "$49.99",
+                images: ["T-Shirt1model1.jpg", "T-Shirt1model2.jpg", "T-Shirt1model3.jpg"],
+                description: "Made from 100% organic cotton, this t-shirt is comfortable and sustainable.",
+                onSale: true
+            },
+            't-shirt2': {
+                title: "T-shirt 2",
+                originalPrice: "$72.99",
+                currentPrice: "$62",
+                images: ["T-shirt2model1.jpg", "T-shirt2model2.jpg", "T-shirt2model3.jpg"],
+                description: "Lightweight and breathable fabric perfect for warm weather.",
+                onSale: true
+            },
+            't-shirt3': {
+                title: "3 shirt",
+                originalPrice: "$65.99",
+                currentPrice: "$65.99",
+                images: ["t-shirt3model1.jpg", "t-shirt3model2.jpg", "t-shirt3model3.jpg"],
+                description: "Sustainable cotton t-shirt with a unique design.",
+                onSale: false
+            },
+            't-shirt4': {
+                title: "4 shirt",
+                originalPrice: "$65.99",
+                currentPrice: "$65.99",
+                images: ["t-shirt4model1.jpg", "t-shirt4model2.jpg", "t-shirt4model3.jpg"],
+                description: "Sustainable cotton t-shirt with a unique design.",
+                onSale: false
+            },
+            't-shirt5': {
+                title: "5 shirt",
+                originalPrice: "$65.99",
+                currentPrice: "$65.99",
+                images: ["t-shirt5model1.jpg", "t-shirt5model2.jpg", "t-shirt5model3.jpg"],
+                description: "Sustainable cotton t-shirt with a unique design.",
+                onSale: false
+            },
+            't-shirt6': {
+                title: "6 shirt",
+                originalPrice: "$65.99",
+                currentPrice: "$65.99",
+                images: ["t-shirt6model1.jpg", "t-shirt6model2.jpg", "t-shirt6model3.jpg"],
+                description: "Sustainable cotton t-shirt with a unique design.",
+                onSale: false
+            },
+            'hoodie1': {
+                title: "hoodie 1",
+                originalPrice: "$72.99",
+                currentPrice: "$62.99",
+                images: ["hoodie1model1.jpg", "hoodie1model2.jpg", "hoodie1model3.jpg"],
+                description: "Made from 100% organic cotton, this crop top is stylish and environmentally friendly.",
+                onSale: true
+            },
+            'hoodie2': {
+                title: "2 hoodie",
+                originalPrice: "$59.99",
+                currentPrice: "$49.99",
+                images: ["hoodie2model1.jpg", "hoodie2model2.jpg", "hoodie2model3.jpg"],
+                description: "Made from 100% organic cotton, this t-shirt is comfortable and sustainable.",
+                onSale: true
+            },
+            'hoodie3': {
+                title: "hoodie 3",
+                originalPrice: "$62.99",
+                currentPrice: "$62.99",
+                images: ["hoodie3model1.jpg", "hoodie3model2.jpg", "hoodie3model3.jpg"],
+                description: "Another great sustainable crop top option.",
+                onSale: false
+            },
+            'hoodie4': {
+                title: "hoodie 4",
+                originalPrice: "$62.99",
+                currentPrice: "$62.99",
+                images: ["hoodie4model1.jpg", "hoodie4model2.jpg", "hoodie4model3.jpg"],
+                description: "Another great sustainable crop top option.",
+                onSale: false
+            },
+            'hoodie5': {
+                title: "hoodie 5",
+                originalPrice: "$62.99",
+                currentPrice: "$62.99",
+                images: ["hoodie5model1.jpg", "hoodie5model2.jpg", "hoodie5model3.jpg"],
+                description: "Another great sustainable crop top option.",
+                onSale: false
+            },
+            'hoodie6': {
+                title: "hoodie 6",
+                originalPrice: "$62.99",
+                currentPrice: "$62.99",
+                images: ["hoodie6model1.jpg", "hoodie6model2.jpg", "hoodie6model3.jpg"],
+                description: "Another great sustainable crop top option.",
+                onSale: false
+            },
+            'croptop1': {
+            title: "1 crop top",
+            originalPrice: "$62.99",
+            currentPrice: "$62.99",
+            images: ["croptop1model1.jpg", "croptop1model2.jpg", "croptop1model3.jpg"],
+            description: "Another great sustainable crop top option.",
+            onSale: false
+
+            },
+            'croptop2': {
+            title: "2 crop top",
+            originalPrice: "$62.99",
+            currentPrice: "$62.99",
+            images: ["croptop2model1.jpg", "croptop2model2.jpg", "croptop2model3.jpg"],
+            description: "Another great sustainable crop top option.",
+            onSale: false
+
+            },
+            'croptop3': {
+            title: "3 crop top",
+            originalPrice: "$62.99",
+            currentPrice: "$62.99",
+            images: ["croptop3model1.jpg", "croptop3model2.jpg", "croptop3model3.jpg"],
+            description: "Another great sustainable crop top option.",
+            onSale: false
+
+            },
+            'croptop4': {
+            title: "4 crop top",
+            originalPrice: "$62.99",
+            currentPrice: "$62.99",
+            images: ["croptop4model1.jpg", "croptop4model2.jpg", "croptop4model3.jpg"],
+            description: "Another great sustainable crop top option.",
+            onSale: false
+
+            },
+            'croptop5': {
+            title: "5 crop top",
+            originalPrice: "$62.99",
+            currentPrice: "$62.99",
+            images: ["croptop5model1.jpg", "croptop5model2.jpg", "croptop5model3.jpg"],
+            description: "Another great sustainable crop top option.",
+            onSale: false
+
+            },
+            'croptop6': {
+            title: "6 crop top",
+            originalPrice: "$62.99",
+            currentPrice: "$62.99",
+            images: ["croptop6model1.jpg", "croptop6model2.jpg", "croptop6model3.jpg"],
+            description: "Another great sustainable crop top option.",
+            onSale: false
+
+}
+        };
+        // ====== CART FUNCTIONS ======
+        function getCart() {
+            const cart = localStorage.getItem('cart');
+            return cart ? JSON.parse(cart) : [];
+        }
+
+        function updateCartCount() {
+            const cart = getCart();
+            document.querySelector('.cart-count').textContent = cart.length;
+        }
+
+        function addToCart() {
+            const selectedSize = document.querySelector('.size-option.selected');
+
+            if (!selectedSize) {
+                alert('Please select a size before adding to cart.');
+                return;
+            }
+
+            const product = {
+                id: new URLSearchParams(window.location.search).get('product'),
+                name: document.querySelector('.product-title').textContent,
+                price: document.querySelector('.product-price').textContent.trim(),
+                size: selectedSize.textContent,
+                quantity: parseInt(document.getElementById('quantity').value),
+                image: document.getElementById('mainImage').src
+            };
+
+            let cart = getCart();
+
+            // Check if product already exists in cart with same size
+            const existingIndex = cart.findIndex(item => 
+                item.id === product.id && item.size === product.size
+            );
+
+            if (existingIndex >= 0) {
+                // Update quantity if product already exists
+                cart[existingIndex].quantity += product.quantity;
+            } else {
+                // Add new product if it doesn't exist
+                cart.push(product);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            alert('Product added to cart!');
+        }
+
+        function clearCart() {
+            localStorage.removeItem('cart');
+            updateCartCount();
+            console.log('Cart cleared');
+        }
+
+        // ====== PRODUCT LOADING ======
+        function loadProduct() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('product');
+
+            console.log("Product ID from URL:", productId);
+            console.log("Available products:", Object.keys(products));
+
+            if (productId && products[productId]) {
+                const product = products[productId];
+                console.log("Loaded product data:", product); // Debug log
+
+                // Update title
+                document.querySelector('.product-title').textContent = product.title;
+                document.title = `${product.title} | RLF`;
+
+                // Update price (handles sale/non-sale)
+                const priceElement = document.querySelector('.product-price');
+                priceElement.innerHTML = ''; // Clear old price
+
+                if (product.onSale && product.originalPrice) {
+                    priceElement.innerHTML = `
+                        <span class="original-price">${product.originalPrice}</span>
+                        ${product.currentPrice} <span class="sale-tag">SALE</span>
+                    `;
+                } else {
+                    priceElement.innerHTML = product.currentPrice;
+                }
+
+                // Update description
+                document.querySelector('.product-description').textContent = product.description;
+
+                // Update images
+                const mainImage = document.getElementById('mainImage');
+                const thumbnailGallery = document.querySelector('.thumbnail-gallery');
+
+                if (product.images && product.images.length > 0) {
+                    mainImage.src = product.images[0];
+                    mainImage.alt = product.title;
+
+                    thumbnailGallery.innerHTML = ''; // Clear old thumbnails
+                    product.images.forEach((image, index) => {
+                        thumbnailGallery.innerHTML += `
+                            <img src="${image}" alt="${product.title} View ${index + 1}" 
+                                 class="thumbnail" onclick="changeImage(this)">
+                        `;
+                    });
+                }
+            } else {
+                console.error("Product not found or invalid product ID");
+                // Optional: Redirect to 404 or show error
+            }
+        }
+        // ====== PRODUCT DETAIL FUNCTIONS ======
+        function changeImage(element) {
+            const mainImage = document.getElementById('mainImage');
+            mainImage.src = element.src;
+        }
+
+        function selectSize(element) {
+            document.querySelectorAll('.size-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        function changeQuantity(change) {
+            const quantityInput = document.getElementById('quantity');
+            let newValue = parseInt(quantityInput.value) + change;
+            quantityInput.value = newValue < 1 ? 1 : newValue;
+        }
+
+        // ====== INITIALIZATION ======
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize cart if it doesn't exist
+            if (!localStorage.getItem('cart')) {
+                localStorage.setItem('cart', JSON.stringify([]));
+            }
+
+            loadProduct();
+            updateCartCount();
+
+            // Temporary debug button (remove in production)
+            document.body.insertAdjacentHTML('beforeend', `
+                <button onclick="clearCart()" style="
+                    position:fixed;
+                    top:10px;
+                    right:10px;
+                    z-index:9999;
+                    background:red;
+                    color:white;
+                    padding:5px 10px;
+                    border:none;
+                    border-radius:4px;
+                    cursor:pointer;
+                ">
+                    Clear Cart (DEBUG)
+                </button>
+            `);
+        });
+    </script>
+</body>
+</html>
