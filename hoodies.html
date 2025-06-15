@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoodies | Rights For Little Futures</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=CMU+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-green: #446D45;
+            --muted-green: #A4CBA5;
+            --gray-blue: #536881;
+            --hover-green: #3A5A3A;
+            --hover-muted: #8FB590;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'CMU Serif', serif;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: white;
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--hover-green);
+            border-color: var(--hover-green);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-accent {
+            background-color: var(--muted-green);
+            color: white;
+            border: 2px solid var(--muted-green);
+        }
+
+        .btn-accent:hover {
+            background-color: var(--hover-muted);
+            border-color: var(--hover-muted);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-green);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            border-radius: 4px;
+            padding: 10px 0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 8px 20px;
+            position: relative;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Nested dropdown for categories */
+        .category-dropdown {
+            position: relative;
+        }
+
+        .category-dropdown-content {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            z-index: 2;
+        }
+
+        .category-dropdown:hover .category-dropdown-content {
+            display: block;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-icons i {
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-bar {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            overflow: hidden;
+            transition: width 0.3s ease;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar.active {
+            width: 200px;
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+        }
+
+        .search-bar input {
+            width: 100%;
+            border: none;
+            outline: none;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--primary-green);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            padding: 20px;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-dropdown {
+            position: relative;
+        }
+
+        .mobile-dropdown-btn {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 12px 0;
+            font-size: inherit;
+            color: inherit;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-dropdown-content {
+            display: none;
+            padding-left: 20px;
+        }
+
+        .mobile-dropdown.active .mobile-dropdown-content {
+            display: block;
+        }
+
+        .mobile-dropdown-content a {
+            padding: 10px 0;
+        }
+
+        /* Product Category Page */
+        .product-category {
+            padding: 60px 0;
+        }
+
+        .category-header {
+            margin-bottom: 40px;
+        }
+
+        .category-header h1 {
+            font-size: 36px;
+            color: var(--primary-green);
+        }
+
+        .category-header p {
+            color: #666;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .sale-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff4d4d;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price {
+            font-weight: bold;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            margin-right: 10px;
+        }
+
+        .add-to-cart {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--hover-green);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 40px;
+        }
+
+        .footer-logo-text {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .footer-contact {
+            margin-bottom: 20px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            font-size: 20px;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: var(--muted-green);
+        }
+
+        .footer-links h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .footer-links ul {
+            list-style-type: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--muted-green);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                flex-direction: column;
+            }
+        }
+        .logo, .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo:hover, .footer-logo:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="RLF Logo">
+                <span class="logo-text">RLF</span>
+            </a>
+
+            <div class="nav-links">
+                <div class="dropdown">
+                    <a href="#">Products</a>
+                    <div class="dropdown-content">
+                        <!-- Clothing Category -->
+                        <div class="category-dropdown">
+                            <a href="#">Clothing <i class="fas fa-chevron-right" style="float: right;"></i></a>
+                            <div class="category-dropdown-content">
+                                <a href="hoodies.html">Hoodies</a>
+                                <a href="crop-tops.html">Crop Tops</a>
+                                <a href="t-shirts.html">T-shirts</a>
+                            </div>
+                        </div>
+
+                        <!-- Accessories Category -->
+                        <div class="category-dropdown">
+                            <a href="#">Accessories <i class="fas fa-chevron-right" style="float: right;"></i></a>
+                            <div class="category-dropdown-content">
+                                <a href="caps.html">Caps</a>
+                                <a href="cups.html">Cups</a>
+                                <a href="keychains.html">Keychains</a>
+                                <a href="stickers.html">Stickers</a>
+                                <a href="pins.html">Pins</a>
+                                <a href="wristbands.html">Wristbands</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="bundles.html">Bundles</a>
+            </div>
+
+            <div class="nav-icons">
+                <div class="search-container">
+                    <i class="fas fa-search" id="search-icon"></i>
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search...">
+                    </div>
+                </div>
+
+                <div style="position: relative;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+
+                <a href="profile.html"><i class="fas fa-user"></i></a>
+
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-btn">
+                    Products
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="mobile-dropdown-content">
+                    <!-- Clothing in Mobile -->
+                    <div class="mobile-dropdown">
+                        <button class="mobile-dropdown-btn">
+                            Clothing
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="mobile-dropdown-content">
+                            <a href="hoodies.html">Hoodies</a>
+                            <a href="crop-tops.html">Crop Tops</a>
+                            <a href="t-shirts.html">T-shirts</a>
+                        </div>
+                    </div>
+
+                    <!-- Accessories in Mobile -->
+                    <div class="mobile-dropdown">
+                        <button class="mobile-dropdown-btn">
+                            Accessories
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="mobile-dropdown-content">
+                            <a href="caps.html">Caps</a>
+                            <a href="cups.html">Cups</a>
+                            <a href="keychains.html">Keychains</a>
+                            <a href="stickers.html">Stickers</a>
+                            <a href="pins.html">Pins</a>
+                            <a href="wristbands.html">Wristbands</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="bundles.html">Bundles</a>
+            <a href="profile.html">Profile</a>
+        </div>
+    </nav>
+
+    <!-- Hoodies Product Page -->
+    <section class="product-category">
+        <div class="container">
+            <div class="category-header">
+                <h1>Hoodies</h1>
+                <p>Clothing</p>
+            </div>
+
+            <div class="product-grid">
+                <!-- Hoodie 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="hoodie1.jpg" alt="Sustainable Hoodie">
+                        <div class="sale-badge">SALE</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Organic Cotton Hoodie</h3>
+                        <div class="product-price">
+                            <div class="price">
+                                <span class="original-price">$59.99</span>
+                                $49.99
+                            </div>
+                            <button class="view-product" onclick="window.location.href='product-detail.html?product=hoodie1'">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hoodie 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="hoodie2.jpg" alt="Sustainable Hoodie">
+                    </div>
+                    <div class="product-info">
+                        <h3>Recycled Material Hoodie</h3>
+                        <div class="product-price">
+                            <div class="price">$54.99</div>
+                            <button class="view-product" onclick="window.location.href='product-detail.html?product=hoodie2'">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hoodie 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="hoodie3.jpg" alt="Sustainable Hoodie">
+                    </div>
+                    <div class="product-info">
+                        <h3>RLF Signature Hoodie</h3>
+                        <div class="product-price">
+                            <div class="price">$62.99</div>
+                            <button class="view-product" onclick="window.location.href='product-detail.html?product=hoodie3'">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hoodie 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="hoodie4.jpg" alt="Sustainable Hoodie">
+                    </div>
+                    <div class="product-info">
+                        <h3>Eco-Friendly Pullover</h3>
+                        <div class="product-price">
+                            <div class="price">$57.99</div>
+                            <button class="view-product" onclick="window.location.href='product-detail.html?product=hoodie4'">
+                        
