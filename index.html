@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rights For Little Futures - Sustainable Merchandise for a Cause</title>
+    <title>Rights For Little Futures | Sustainable Merchandise Supporting Indian Charities</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=CMU+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        /* Global Styles */
         :root {
             --primary-green: #446D45;
             --muted-green: #A4CBA5;
             --gray-blue: #536881;
+            --hover-green: #3A5A3A;
+            --hover-muted: #8FB590;
         }
 
         * {
@@ -21,190 +24,326 @@
         }
 
         body {
+            color: #333;
             line-height: 1.6;
         }
 
-        /* Navigation Styles */
-        .nav-container {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
+        a {
+            text-decoration: none;
+            color: inherit;
         }
 
-        .nav-content {
+        button {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .container {
+            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: white;
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--hover-green);
+            border-color: var(--hover-green);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-accent {
+            background-color: var(--muted-green);
+            color: white;
+            border: 2px solid var(--muted-green);
+        }
+
+        .btn-accent:hover {
+            background-color: var(--hover-muted);
+            border-color: var(--hover-muted);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .nav-logo {
+        .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
+            gap: 10px;
         }
 
-        .nav-logo img {
+        .logo img {
             height: 40px;
         }
 
-        .nav-logo span {
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
             color: var(--primary-green);
-            font-size: 1.5rem;
-            font-weight: bold;
         }
 
-        .nav-categories {
+        .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 30px;
         }
 
-        .nav-category {
+        .nav-links a {
+            font-weight: 500;
             position: relative;
-            cursor: pointer;
         }
 
-        .nav-category > span {
-            color: var(--gray-blue);
+        .nav-links a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-green);
         }
 
         .dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 1rem;
-            min-width: 200px;
-            display: none;
+            position: relative;
         }
 
-        .nav-category:hover .dropdown {
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            border-radius: 4px;
+            padding: 10px 0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 8px 20px;
+            position: relative;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Nested dropdown for categories */
+        .category-dropdown {
+            position: relative;
+        }
+
+        .category-dropdown-content {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            z-index: 2;
+        }
+
+        .category-dropdown:hover .category-dropdown-content {
             display: block;
         }
 
         .nav-icons {
             display: flex;
-            gap: 1.5rem;
             align-items: center;
+            gap: 20px;
         }
 
-        .nav-icon {
-            color: var(--gray-blue);
-            font-size: 1.2rem;
+        .nav-icons i {
+            font-size: 18px;
             cursor: pointer;
         }
 
+        .search-container {
+            position: relative;
+        }
+
         .search-bar {
-            display: none;
             position: absolute;
             right: 0;
-            top: 100%;
-            background: white;
-            padding: 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            overflow: hidden;
+            transition: width 0.3s ease;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .search-bar.active {
-            display: block;
+            width: 200px;
+            padding: 8px 15px;
+            border: 1px solid #ddd;
         }
 
-        .search-input {
-            width: 300px;
-            padding: 0.5rem;
-            border: 1px solid var(--gray-blue);
-            border-radius: 20px;
+        .search-bar input {
+            width: 100%;
+            border: none;
+            outline: none;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--primary-green);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .hamburger {
             display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            padding: 20px;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-dropdown {
+            position: relative;
+        }
+
+        .mobile-dropdown-btn {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 12px 0;
+            font-size: inherit;
+            color: inherit;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-dropdown-content {
+            display: none;
+            padding-left: 20px;
+        }
+
+        .mobile-dropdown.active .mobile-dropdown-content {
+            display: block;
+        }
+
+        .mobile-dropdown-content a {
+            padding: 10px 0;
         }
 
         /* Hero Section */
         .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                        url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-4.0.3') center/cover;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            color: white;
             display: flex;
             align-items: center;
-            justify-content: center;
             text-align: center;
-            color: white;
-            padding: 0 1rem;
         }
 
         .hero-content {
-            max-width: 800px;
+            width: 100%;
         }
 
-        .hero-title {
+        .hero h1 {
             font-size: 103px;
-            margin-bottom: 1rem;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
 
-        .hero-subtitle {
+        .hero h2 {
             font-size: 26px;
-            margin-bottom: 2rem;
+            margin-bottom: 30px;
+            font-weight: 400;
         }
 
-        .hero-cta {
-            display: inline-block;
-            padding: 1rem 2rem;
-            border: 2px solid white;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .hero-cta:hover {
-            background: white;
-            color: var(--primary-green);
-        }
-
-        /* Mobile Navigation */
-        @media (max-width: 768px) {
-            .nav-categories, .nav-icons {
-                display: none;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .mobile-menu {
-                position: fixed;
-                top: 0;
-                left: -100%;
-                width: 80%;
-                height: 100vh;
-                background: white;
-                padding: 2rem;
-                transition: left 0.3s ease;
-            }
-
-            .mobile-menu.active {
-                left: 0;
-            }
-        }
-
-        /* Purpose Section Styles */
+        /* Our Purpose Section */
         .purpose {
-            padding: 6rem 2rem;
-            background: #f9f9f9;
+            padding: 80px 0;
         }
 
-        .purpose-content {
-            max-width: 1200px;
-            margin: 0 auto;
+        .purpose-container {
             display: flex;
-            gap: 4rem;
+            gap: 50px;
             align-items: center;
         }
 
@@ -215,621 +354,525 @@
         }
 
         .purpose-text {
-            flex: 1.5;
-            font-size: 1.2rem;
-            color: var(--gray-blue);
-        }
-
-        /* Team Section Styles */
-        .team {
-            padding: 6rem 2rem;
-            background: white;
-        }
-
-        .team-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .team-title {
-            font-size: 3rem;
-            color: var(--primary-green);
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 4rem;
-        }
-
-        .team-member {
-            text-align: center;
-        }
-
-        .member-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin: 0 auto 1.5rem;
-        }
-
-        .member-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .team-member h3 {
-            color: var(--primary-green);
-            margin-bottom: 0.5rem;
-        }
-
-        .member-role {
-            color: var(--gray-blue);
-            font-size: 0.9rem;
-        }
-
-        /* Join Us Form Styles */
-        .join-us {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .join-us h3 {
-            color: var(--primary-green);
-            font-size: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .join-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .join-form input,
-        .join-form textarea {
-            padding: 1rem;
-            border: 1px solid var(--gray-blue);
-            border-radius: 5px;
-            font-family: 'CMU Serif', serif;
-        }
-
-        .join-form textarea {
-            height: 150px;
-            resize: vertical;
-        }
-
-        .join-form button {
-            background: var(--primary-green);
-            color: white;
-            padding: 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'CMU Serif', serif;
-            transition: background 0.3s ease;
-        }
-
-        .join-form button:hover {
-            background: var(--muted-green);
-        }
-
-        @media (max-width: 768px) {
-            .purpose-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .purpose-title {
-                font-size: 60px;
-            }
-
-            .team-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-        }
-
-        /* SDGs Section Styles */
-        .sdgs {
-            padding: 6rem 2rem;
-            background: #f9f9f9;
-        }
-
-        .sdgs-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .sdgs-title {
-            font-size: 3rem;
-            color: var(--primary-green);
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .sdgs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-
-        .sdg-card {
-            background: white;
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .sdg-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .sdg-card h3 {
-            color: var(--primary-green);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .sdg-card p {
-            color: var(--gray-blue);
+            flex: 2;
+            font-size: 18px;
             line-height: 1.8;
         }
 
-        /* Partnerships Section Styles */
-        .partnerships {
-            padding: 6rem 2rem;
-            background: white;
-        }
-
-        .partnerships-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .partnerships-title {
-            font-size: 3rem;
-            color: var(--primary-green);
+        /* Team Section */
+        .team {
+            padding: 80px 0;
+            background-color: #f9f9f9;
             text-align: center;
-            margin-bottom: 4rem;
         }
 
-        .partnerships-grid {
+        .team h2 {
+            font-size: 42px;
+            margin-bottom: 50px;
+            color: var(--primary-green);
+        }
+
+        .team-members {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .team-member {
+            width: 200px;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid var(--muted-green);
+            aspect-ratio: 1/1;
+        }
+
+        .team-member h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .team-member p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* SDGs Section */
+        .sdgs {
+            padding: 80px 0;
+        }
+
+        .sdgs-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .sdg-card {
+            flex: 1;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .sdg-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary-green);
+        }
+
+        /* Partnerships Section */
+        .partnerships {
+            padding: 60px 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .partnerships h2 {
+            font-size: 42px;
+            margin-bottom: 40px;
+            color: var(--primary-green);
+        }
+
+        .partners-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 2rem;
+            gap: 20px;
         }
 
         .partner-logo {
-            aspect-ratio: 1;
-            padding: 1rem;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f9f9f9;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .partner-logo:hover {
-            transform: scale(1.05);
+            height: 100px;
         }
 
         .partner-logo img {
+            max-height: 60px;
             max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
         }
 
-        @media (max-width: 1024px) {
-            .partnerships-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
+        .partner-logo:hover img {
+            filter: grayscale(0);
+            opacity: 1;
         }
 
-        @media (max-width: 768px) {
-            .partnerships-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .sdg-card {
-                padding: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .partnerships-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Reviews Section Styles */
+        /* Reviews Section */
         .reviews {
-            padding: 6rem 2rem;
-            background: #f9f9f9;
+            padding: 80px 0;
         }
 
-        .reviews-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .reviews-title {
-            font-size: 3rem;
-            color: var(--primary-green);
+        .reviews h2 {
+            font-size: 42px;
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 50px;
+            color: var(--primary-green);
         }
 
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        .review-cards {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding-bottom: 20px;
         }
 
         .review-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            min-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
         .stars {
             color: #FFD700;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 15px;
         }
 
         .review-text {
-            color: var(--gray-blue);
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
+            margin-bottom: 15px;
+            font-style: italic;
         }
 
-        .reviewer-name {
-            color: var(--primary-green);
-            font-weight: bold;
+        .reviewer {
+            font-weight: 600;
         }
 
-        /* Promotional Video Section Styles */
-        .promo-video {
-            padding: 6rem 2rem;
-            background: white;
-        }
-
-        .promo-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 4rem;
-            align-items: center;
+        /* Video Section */
+        .video-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
         }
 
         .video-container {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            display: flex;
+            align-items: center;
+            gap: 50px;
         }
 
-        .video-wrapper {
+        .video-text {
+            flex: 1;
+        }
+
+        .video-text h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+        }
+
+        .video-embed {
+            flex: 1;
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-embed iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            cursor: pointer;
         }
 
-        .video-thumbnail {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 15px;
-        }
-
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
-        }
-
-        .play-button i {
-            color: var(--primary-green);
-            font-size: 2rem;
-        }
-
-        .video-wrapper:hover .play-button {
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-
-        .video-text {
-            padding: 2rem;
-        }
-
-        .video-text h2 {
-            color: var(--primary-green);
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .video-text p {
-            color: var(--gray-blue);
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        @media (max-width: 768px) {
-            .promo-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .video-text {
-                text-align: center;
-            }
-        }
-
-        /* Footer Styles */
-        .footer {
-            background: var(--primary-green);
+        /* Footer */
+        footer {
+            background-color: #333;
             color: white;
-            padding: 4rem 2rem 2rem;
+            padding: 60px 0 20px;
         }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 4rem;
-            margin-bottom: 2rem;
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
         .footer-logo {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
         .footer-logo img {
             height: 40px;
         }
 
-        .footer-logo span {
-            font-size: 1.2rem;
-            font-weight: bold;
+        .footer-logo-text {
+            font-size: 18px;
+            font-weight: 700;
         }
 
         .footer-contact {
-            margin-bottom: 2rem;
+            margin-bottom: 20px;
         }
 
-        .footer-contact p {
-            margin-bottom: 0.5rem;
+        .footer-social {
+            display: flex;
+            gap: 15px;
         }
 
-        .footer-contact a {
+        .footer-social a {
+            font-size: 20px;
             color: white;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 1rem;
+            transition: color 0.3s ease;
         }
 
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s ease;
-        }
-
-        .social-icon:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .social-icon i {
-            font-size: 1.2rem;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .footer-social a:hover {
+            color: var(--muted-green);
         }
 
         .footer-links h3 {
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
+            font-size: 18px;
+            margin-bottom: 15px;
         }
 
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s ease;
+        .footer-links ul {
+            list-style-type: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
         }
 
         .footer-links a:hover {
-            opacity: 0.8;
+            color: var(--muted-green);
         }
 
         .footer-bottom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            font-size: 0.9rem;
-            opacity: 0.8;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 72px;
+            }
+
+            .purpose-title {
+                font-size: 60px;
+            }
+
+            .partners-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            .nav-links {
+                display: none;
             }
 
-            .footer-right {
-                text-align: center;
+            .hamburger {
+                display: block;
             }
 
-            .social-icons {
-                justify-content: center;
+            .hero h1 {
+                font-size: 48px;
             }
+
+            .hero h2 {
+                font-size: 20px;
+            }
+
+            .purpose-container {
+                flex-direction: column;
+            }
+
+            .purpose-title {
+                font-size: 48px;
+                margin-bottom: 20px;
+            }
+
+            .sdgs-container {
+                flex-direction: column;
+            }
+
+            .video-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .partners-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-container {
+                flex-direction: column;
+            }
+        }
+        .logo, .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .logo:hover, .footer-logo:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav-container">
-        <div class="nav-content">
-            <a href="/" class="nav-logo">
-                <img src="path-to-logo.png" alt="RLF Logo">
-                <span>RLF</span>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="RLF Logo">
+                <span class="logo-text">RLF</span>
             </a>
 
-            <div class="nav-categories">
-                <div class="nav-category">
-                    <span>Clothing</span>
-                    <div class="dropdown">
-                        <a href="#">Hoodies</a>
-                        <a href="#">Crop Tops</a>
-                        <a href="#">T-shirts</a>
+            <div class="nav-links">
+                <div class="dropdown">
+                    <a href="#">Products</a>
+                    <div class="dropdown-content">
+                        <!-- Clothing Category -->
+                        <div class="category-dropdown">
+                            <a href="#">Clothing <i class="fas fa-chevron-right" style="float: right;"></i></a>
+                            <div class="category-dropdown-content">
+                                <a href="hoodies.html">Hoodies</a>
+                                <a href="crop-tops.html">Crop Tops</a>
+                                <a href="t-shirts.html">T-shirts</a>
+                            </div>
+                        </div>
+
+                        <!-- Accessories Category -->
+                        <div class="category-dropdown">
+                            <a href="#">Accessories <i class="fas fa-chevron-right" style="float: right;"></i></a>
+                            <div class="category-dropdown-content">
+                                <a href="caps.html">Caps</a>
+                                <a href="cups.html">Cups</a>
+                                <a href="keychains.html">Keychains</a>
+                                <a href="stickers.html">Stickers</a>
+                                <a href="pins.html">Pins</a>
+                                <a href="wristbands.html">Wristbands</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="nav-category">
-                    <span>Accessories</span>
-                    <div class="dropdown">
-                        <a href="#">Caps</a>
-                        <a href="#">Totes</a>
-                        <a href="#">Cups</a>
-                        <a href="#">Keychains</a>
-                        <a href="#">Pins</a>
-                        <a href="#">Stickers</a>
-                        <a href="#">Wristbands</a>
-                    </div>
-                </div>
-                <a href="#" class="nav-category">Bundles</a>
+
+                <a href="bundles.html">Bundles</a>
             </div>
 
             <div class="nav-icons">
-                <i class="fas fa-search nav-icon" id="search-icon"></i>
-                <i class="fas fa-shopping-cart nav-icon"></i>
-                <i class="fas fa-user nav-icon"></i>
-                <i class="fas fa-bars hamburger"></i>
+                <div class="search-container">
+                    <i class="fas fa-search" id="search-icon"></i>
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search...">
+                    </div>
+                </div>
+
+                <div style="position: relative;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+
+                <a href="profile.html"><i class="fas fa-user"></i></a>
+
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-btn">
+                    Products
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="mobile-dropdown-content">
+                    <!-- Clothing in Mobile -->
+                    <div class="mobile-dropdown">
+                        <button class="mobile-dropdown-btn">
+                            Clothing
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="mobile-dropdown-content">
+                            <a href="hoodies.html">Hoodies</a>
+                            <a href="crop-tops.html">Crop Tops</a>
+                            <a href="t-shirts.html">T-shirts</a>
+                        </div>
+                    </div>
+
+                    <!-- Accessories in Mobile -->
+                    <div class="mobile-dropdown">
+                        <button class="mobile-dropdown-btn">
+                            Accessories
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="mobile-dropdown-content">
+                            <a href="caps.html">Caps</a>
+                            <a href="cups.html">Cups</a>
+                            <a href="keychains.html">Keychains</a>
+                            <a href="stickers.html">Stickers</a>
+                            <a href="pins.html">Pins</a>
+                            <a href="wristbands.html">Wristbands</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="search-bar">
-                <input type="text" class="search-input" placeholder="Search...">
-            </div>
+            <a href="bundles.html">Bundles</a>
+            <a href="profile.html">Profile</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">Your Purchase, Their Future</h1>
-            <p class="hero-subtitle">Buy to help, wear to support.</p>
-            <a href="#shop" class="hero-cta">Shop Now →</a>
+        <div class="container hero-content">
+            <h1>Your Purchase, Their Future.</h1>
+            <h2>Buy to help, wear to support.</h2>
+            <a href="products.html" class="btn btn-outline">Shop Now →</a>
         </div>
     </section>
 
     <!-- Our Purpose Section -->
     <section class="purpose">
-        <div class="purpose-content">
+        <div class="container purpose-container">
             <h2 class="purpose-title">Our Purpose</h2>
             <div class="purpose-text">
-                <p>Rights For Little Futures is a non-profit e-commerce initiative dedicated to combating child labor in India through sustainable merchandise sales. Every purchase directly funds educational programs and support services for children in need, helping to create a brighter future for the next generation.</p>
+                <p>RLF is an e-commerce non-profit dedicated to selling sustainable merchandise to fund Indian charities that combat child labor. Every purchase you make directly contributes to protecting children's rights and providing them with better opportunities for education and a brighter future.</p>
+                <p>We believe that ethical consumerism can be a powerful force for change. By choosing our products, you're not just buying quality items - you're investing in the lives of vulnerable children across India.</p>
             </div>
         </div>
     </section>
 
     <!-- Team Section -->
     <section class="team">
-        <div class="team-content">
-            <h2 class="team-title">Meet Our Team</h2>
-            <div class="team-grid">
+        <div class="container">
+            <h2>Our Team</h2>
+            <div class="team-members">
                 <div class="team-member">
-                    <div class="member-image">
-                        <img src="path-to-eunice.jpg" alt="Eunice Ho">
-                    </div>
+                    <img src="eunice.jpg" alt="Eunice Ho">
                     <h3>Eunice Ho</h3>
-                    <p class="member-role">Founder, E-commerce Manager, Customer Service Representative, Marketing</p>
+                    <p>Founder, E-commerce Manager, Customer Service Representative, Marketing</p>
                 </div>
+
                 <div class="team-member">
-                    <div class="member-image">
-                        <img src="path-to-caloice.jpg" alt="Caloice Cheung Yuet Ching">
-                    </div>
-                    <h3>Caloice Cheung Yuet Ching</h3>
-                    <p class="member-role">Founder, E-commerce Manager, Partnership Manager</p>
+                    <img src="caloice.jpg" alt="Caloice Cheung">
+                    <h3>Caloice Cheung</h3>
+                    <p>Founder, E-commerce Manager, Partnership Manager</p>
                 </div>
+
                 <div class="team-member">
-                    <div class="member-image">
-                        <img src="path-to-sophia.jpg" alt="Sophia Siu">
-                    </div>
+                    <img src="sophia.jpg" alt="Sophia Siu">
                     <h3>Sophia Siu</h3>
-                    <p class="member-role">General Assistance</p>
+                    <p>General Assistance</p>
                 </div>
+
                 <div class="team-member">
-                    <div class="member-image">
-                        <img src="path-to-libby.jpg" alt="Libby Lee">
-                    </div>
+                    <img src="libby.jpg" alt="Libby Lee">
                     <h3>Libby Lee</h3>
-                    <p class="member-role">Marketing, Designer</p>
+                    <p>Marketing, Designer</p>
                 </div>
             </div>
-            <div class="join-us">
-                <h3>Join Us!</h3>
-                <form class="join-form">
-                    <input type="text" placeholder="Name" required>
-                    <input type="email" placeholder="Email" required>
-                    <textarea placeholder="Message" required></textarea>
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
+
+            <button class="btn btn-primary">Join Us!</button>
         </div>
     </section>
 
     <!-- SDGs Section -->
     <section class="sdgs">
-        <div class="sdgs-content">
-            <h2 class="sdgs-title">Our Impact</h2>
-            <div class="sdgs-grid">
+        <div class="container">
+            <h2>Supporting Sustainable Development Goals</h2>
+            <div class="sdgs-container">
                 <div class="sdg-card">
-                    <div class="sdg-icon">🎓</div>
                     <h3>SDG 4: Quality Education</h3>
-                    <p>We promote SDG 4: Quality Education through utilizing fundings to local Indian Child Schooling support communities to promote free schooling services for students in India.</p>
+                    <p>Promotes SDG 4: Quality Education through utilizing fundings to local Indian Child Schooling support communities to promote free schooling services for students in India.</p>
                 </div>
+
                 <div class="sdg-card">
-                    <div class="sdg-icon">⚖️</div>
-                    <h3>SDG 16: Peace, Justice, and Strong Institutions</h3>
-                    <p>We promote SDG 16 Peace, Justice, and Strong Institutions through voicing out the importance of addressing child labor in India, and voicing out for childrens in India.</p>
+                    <h3>SDG 16: Peace, Justice and Strong Institutions</h3>
+                    <p>Promotes SDG 16 Peace, Justice, and Strong Institutions through voicing out the importance of addressing child labor in India, and voiceing out for childrens in India.</p>
                 </div>
             </div>
         </div>
@@ -837,94 +880,150 @@
 
     <!-- Partnerships Section -->
     <section class="partnerships">
-        <div class="partnerships-content">
-            <h2 class="partnerships-title">Our Partners</h2>
-            <div class="partnerships-grid">
-                <!-- Repeat the partner logo 18 times (6x3 grid) -->
-                <div class="partner-logo">
-                    <img src="path-to-partner-logo.png" alt="Partner Logo">
-                </div>
-                <!-- Repeat 17 more times -->
+        <div class="container">
+            <h2>Our Partnerships</h2>
+            <div class="partners-grid">
+                <div class="partner-logo"><img src="partner1.png" alt="Partner 1"></div>
+                <div class="partner-logo"><img src="partner1.png" alt="Partner 2"></div>
+                <div class="partner-logo"><img src="partner1.png" alt="Partner 3"></div>
+                <div class="partner-logo"><img src="partner1.png" alt="Partner 4"></div>
+                <div class="partner-logo"><img src="partner1.png" alt="Partner 5"></div>
+                <div class="partner-logo"><img src="partner1.png" alt="Partner 6"></div>
+                <div class="partner-logo"><img src="partner1.png" alt="Partner 7"></div>
+                <div class="partner-logo"><img src="partner1.png" alt="Partner 8"></div>
+                <div class="partner-logo"><img src="partner1.png" alt="Partner 9"></div>
+                <div class="partner-logo"><img src="partner1.png" alt="Partner 10"></div>
+                <div class="partner-logo"><img src="partner1.png" alt="Partner 11"></div>
+                <div class="partner-logo"><img src="partner1.png" alt="Partner 12"></div>
             </div>
         </div>
     </section>
 
     <!-- Reviews Section -->
     <section class="reviews">
-        <div class="reviews-content">
-            <h2 class="reviews-title">What Our Customers Say</h2>
-            <div class="reviews-grid">
+        <div class="container">
+            <h2>Customer Reviews</h2>
+            <div class="review-cards">
                 <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="review-text">"Amazing quality products and knowing that my purchase helps children in need makes it even better. Will definitely buy again!"</p>
-                    <p class="reviewer-name">- Sarah M.</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">"Love my new hoodie! It's so comfortable and I feel good knowing my purchase is helping children in need."</p>
+                    <p class="reviewer">- Sarah T.</p>
                 </div>
+
                 <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="review-text">"The sustainable materials and ethical production make these products stand out. Plus, the impact they create is incredible."</p>
-                    <p class="reviewer-name">- John D.</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">"The quality of the tote bag exceeded my expectations. Plus, the mission behind the brand is truly inspiring."</p>
+                    <p class="reviewer">- Michael K.</p>
                 </div>
+
                 <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="review-text">"Beautiful designs and great quality. Love that my fashion choices can make a positive impact on children's lives."</p>
-                    <p class="reviewer-name">- Emma L.</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="review-text">"Fast shipping and great customer service. Will definitely be purchasing more items for gifts!"</p>
+                    <p class="reviewer">- Priya M.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Promotional Video Section -->
-    <section class="promo-video">
-        <div class="promo-content">
-            <div class="video-container">
-                <div class="video-wrapper">
-                    <img src="path-to-video-thumbnail.jpg" alt="Promotional Video Thumbnail" class="video-thumbnail">
-                    <div class="play-button">
-                        <i class="fas fa-play"></i>
-                    </div>
-                </div>
-            </div>
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="container video-container">
             <div class="video-text">
-                <h2>Our Story</h2>
-                <p>Watch how Rights For Little Futures is making a difference in the lives of children in India through sustainable fashion and community support.</p>
+                <h2>Our Mission in Action</h2>
+                <p>Watch our short documentary to see how your purchases are making a real difference in the lives of children across India.</p>
+                <p>Learn about the charities we support and the impact we're making together.</p>
+            </div>
+
+            <div class="video-embed">
+                <iframe src="https://www.youtube.com/embed/example" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-left">
-                <div class="footer-logo">
-                    <img src="path-to-logo.png" alt="RLF Logo">
-                    <span>Rights For Little Futures</span>
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <a href="index.html" class="footer-logo">
+                        <img src="logo.png" alt="RLF Logo">
+                        <span class="footer-logo-text">Rights For Little Futures</span>
+                    </a>
+                    <p>An e-commerce non-profit selling sustainable merchandise to fund Indian charities combating child labor.</p>
                 </div>
+
                 <div class="footer-contact">
-                    <p>Contact Us:</p>
-                    <a href="mailto:rightsforlittlefutures@gmail.com">rightsforlittlefutures@gmail.com</a>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <h3>Contact Us</h3>
+                    <p>Email: rightsforlittlefutures@gmail.com</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
-            </div>
-            <div class="footer-right">
+
                 <div class="footer-links">
                     <h3>Service</h3>
-                    <a href="#">FAQ</a>
-                    <a href="#">Shipping Policy</a>
-                    <a href="#">Terms of Service</a>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="shipping.html">Shipping Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
                 </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Rights For Little Futures. All rights reserved.</p>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rights For Little Futures. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Search functionality
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Mobile Dropdown Toggle
+        const mobileDropdownBtns = document.querySelectorAll('.mobile-dropdown-btn');
+        mobileDropdownBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const dropdown = this.parentElement;
+                dropdown.classList.toggle('active');
+
+                // Close other dropdowns when opening a new one
+                if (dropdown.classList.contains('active')) {
+                    document.querySelectorAll('.mobile-dropdown').forEach(item => {
+                        if (item !== dropdown && item.classList.contains('active')) {
+                            item.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Search Bar Toggle
         const searchIcon = document.getElementById('search-icon');
         const searchBar = document.querySelector('.search-bar');
 
@@ -932,26 +1031,14 @@
             searchBar.classList.toggle('active');
         });
 
-        // Mobile menu functionality
-        const hamburger = document.querySelector('.hamburger');
-        const mobileMenu = document.createElement('div');
-        mobileMenu.className = 'mobile-menu';
-        mobileMenu.innerHTML = `
-            <a href="#">Products</a>
-            <a href="#">Bundles</a>
-            <a href="#">Profile</a>
-        `;
-        document.body.appendChild(mobileMenu);
-
-        hamburger.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
-
-        // Video play functionality
-        const videoWrapper = document.querySelector('.video-wrapper');
-        videoWrapper.addEventListener('click', () => {
-            // Add video player functionality here
-            console.log('Play video');
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.matches('.dropdown *, .category-dropdown *')) {
+                const dropdowns = document.querySelectorAll('.dropdown-content, .category-dropdown-content');
+                dropdowns.forEach(dropdown => {
+                    dropdown.style.display = 'none';
+                });
+            }
         });
     </script>
 </body>
